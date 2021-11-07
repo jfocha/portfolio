@@ -24,12 +24,28 @@ export default function Projects() {
     const open = Boolean(anchorEl);
 
     return (
-        <ImageList sx={{ width: '100%', height: '100%' }}>
-            <ImageListItem key="Subheader" cols={2}>
-                <ListSubheader component="div" sx={{
-                    fontFamily: 'default',
-                    fontWeight: 'bold', fontSize: 30, textAlign: 'center',
-                }}>Projects</ListSubheader>
+        <ImageList
+            sx={{
+                width: '100%', height: '100%', overflow: 'auto'
+            }}>
+            <ImageListItem
+                key="Subheader"
+                cols={2}>
+                <ListSubheader
+                    component="div"
+                    sx={{
+                        fontFamily: 'default',
+                        fontStyle: 'oblique',
+                        letterSpacing: 10,
+                        // fontWeight: 'bold',
+                        fontSize: '3rem',
+                        textAlign: 'center',
+                        pt: '4rem',
+                        color: 'white',
+                        backgroundColor: 'inherit'
+                    }}>
+                    Projects
+                </ListSubheader>
             </ImageListItem>
             {itemData.map((item, i) => (
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
@@ -39,19 +55,22 @@ export default function Projects() {
                         onMouseEnter={handlePopoverOpen}
                         onMouseLeave={handlePopoverClose}
                     >
-                        <ImageListItem key={item.img}
+                        <ImageListItem
+                            key={item.img}
+                            
                             sx={{
                                 m: 3,
+                                borderRadius: '12px',
                                 boxShadow: 3,
                                 ":hover": {
                                     boxShadow: 12,
                                 },
                             }}>
-
                             <img
                                 src={require(`../../assets/${item.img}.jpg`).default}
                                 alt={item.title}
                                 loading="lazy"
+                                
                             />
                             <ImageListItemBar
                                 title={item.title}
@@ -59,6 +78,7 @@ export default function Projects() {
                                 actionIcon={
                                     <IconButton
                                         sx={{
+                                            pr: 2,
                                             color: 'rgba(255, 255, 255, 0.54)',
                                             ":hover": {
                                                 transform: "scale3d(1.4, 1.4, 1)",
@@ -66,8 +86,13 @@ export default function Projects() {
                                         }}
                                         aria-label={`info about ${item.title}`}
                                     >
-                                        <a href={`https://github.com/jfocha/${item.img}`} target="_blank" rel="noopener noreferrer"><GitHubIcon /> </a>
-
+                                        <a href={`https://github.com/jfocha/${item.img}`} target="_blank" rel="noopener noreferrer">
+                                            <GitHubIcon
+                                                sx={{
+                                                    transform: "scale3d(1.5, 1.5, 1)",
+                                                    color: 'white',
+                                                }} />
+                                        </a>
                                     </IconButton>
                                 }
                             />
@@ -96,7 +121,7 @@ export default function Projects() {
                             <Typography sx={{ p: 1 }}>{item.description}</Typography>
                         ) : (
                             undefined
-            )}
+                        )}
                     </Popover>
                 </a>
             ))}

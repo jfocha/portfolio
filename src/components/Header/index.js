@@ -11,12 +11,14 @@ import { Link } from 'react-router-dom';
 
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{  
+      // background: 'red', 
+      }}>
       <AppBar position="static">
         <Toolbar>
           <Grid item xs>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Joseph Focha</Link>
+              <Link to="/" style={{ textDecoration: 'none', color: 'inherit', fontFamily: 'Permanent Marker', fontSize: '2rem', }}>Joseph Focha</Link>
             </Typography>
           </Grid>
           <Grid
@@ -28,9 +30,9 @@ export default function ButtonAppBar() {
           >
             {/* <Button color="inherit">Login</Button>  */}
             
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>About</Link>
-            <Link to="/projects" style={{ textDecoration: 'none', color: 'inherit' }}>Projects</Link>
-          <Link to="/contact" style={{ textDecoration: 'none', color: 'inherit' }}>Contact</Link>
+            <Link to="/" style={{ textDecoration: 'none', fontStyle: 'oblique', fontSize: '1.5rem', color: 'inherit' }}>About</Link>
+            <Link to="/projects" style={{ textDecoration: 'none', fontStyle: 'oblique', fontSize: '1.5rem', color: 'inherit' }}>Projects</Link>
+          <Link to="/contact" style={{ textDecoration: 'none', fontStyle: 'oblique', fontSize: '1.5rem', color: 'inherit' }}>Contact</Link>
           
           </Grid>
           <IconButton
