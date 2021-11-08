@@ -14,3 +14,18 @@ code {
     monospace;
 }
 
+a {
+  text-decoration-line: inherit;
+  color: inherit;
+}
+
+.icon {
+  color: white;
+}
+
+.icon:hover {
+  transform: scale3d(1.5, 1.5, 1)
+}
+.navActive {
+  color: red;
+}

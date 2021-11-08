@@ -1,44 +1,61 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from './components/Header';
 import About from './pages/About';
 import Projects from './pages/Projects';
+import Contact from './pages/Contact';
 import Sidebar from './components/Sidebar';
 import backImage from './assets/background.jpg';
 
 // const image = { uri: require(`./assets/background.jpg`).default };
 
 function App() {
+  const [categories] = useState([
+    {
+      name: 'About Joe',
+      link: "/"
+    },
+    {
+      name: 'Portfolio',
+      link: "/projects"
+    },
+    {
+      name: 'Contact',
+      link: "/contact"
+    },
+  ]);
+
+  const [currentCategory, setCurrentCategory] = useState(categories[0]);
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       height: '100vh',
-      // overflow: 'hidden'
-      
-    
-    
     },
     image: {
       flex: 1,
       width: null,
       height: '100vh',
-      
     }
   });
   return (
     <View style={styles.container}>
       <ImageBackground source={backImage} resizeMode='cover' style={styles.image}>
         <Router>
-          <Header />
+          <Header
+            categories={categories}
+            setCurrentCategory={setCurrentCategory}
+            currentCategory={currentCategory}
+          />
 
-          
+
           <Box
             sx={{
               display: 'grid',
               maxHeight: '100vh',
-            overflow: 'auto',
+              overflow: 'auto',
               gridTemplateColumns: 'repeat(8, 1fr)',
               gap: 6,
               gridTemplateRows: 'auto',
@@ -60,22 +77,22 @@ function App() {
             }}>
               <Sidebar />
             </Box>
-            <Box sx={{ 
+            <Box sx={{
               gridArea: 'main',
               alignItems: 'flex-start',
               // background: 'orange',
-              
-               }}>
+
+            }}>
               <Switch>
                 <Route exact path="/" component={About} />
                 <Route exact path="/projects" component={Projects} />
-                {/* <Route exact path="/contact" component={Contact} />
+                {/* <Route exact path="/contact" component={Contact} /> */}
 
-              <Route component={NoMatch} /> */}
+              {/* <Route component={NoMatch} /> */}
               </Switch>
             </Box>
           </Box>
-          
+
 
         </Router>
       </ImageBackground>

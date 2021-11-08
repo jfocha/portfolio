@@ -8,20 +8,24 @@ import IconButton from '@mui/material/IconButton';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
 
 export default function Projects() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const handlePopoverOpen = (event) => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [openedPopoverId, setOpenedPopoverId] = React.useState(null);
+
+    const handlePopoverOpen = (event, popoverId) => {
         setAnchorEl(event.currentTarget);
-    };
+        setOpenedPopoverId(popoverId);
+    }
 
     const handlePopoverClose = () => {
+        setOpenedPopoverId(null);
         setAnchorEl(null);
     };
 
     const open = Boolean(anchorEl);
+
 
     return (
         <ImageList
@@ -52,29 +56,30 @@ export default function Projects() {
                     <Typography
                         aria-owns={open ? `mouse-over-popover-${i}` : undefined}
                         aria-haspopup="true"
-                        onMouseEnter={handlePopoverOpen}
+                        // onMouseEnter={handlePopoverOpen}
+                        onMouseEnter={(e) => handlePopoverOpen(e, i)}
                         onMouseLeave={handlePopoverClose}
                     >
                         <ImageListItem
                             key={item.img}
-                            
+
                             sx={{
                                 m: 3,
-                                borderRadius: '12px',
-                                boxShadow: 3,
-                                ":hover": {
-                                    boxShadow: 12,
-                                },
+                                // borderRadius: '12px',
+                                // boxShadow: 3,
+                                // ":hover": {
+                                //     boxShadow: 12,
+                                // },
                             }}>
                             <img
                                 src={require(`../../assets/${item.img}.jpg`).default}
                                 alt={item.title}
                                 loading="lazy"
-                                
+
                             />
                             <ImageListItemBar
                                 title={item.title}
-                                subtitle={item.description}
+                                // subtitle={item.description}
                                 actionIcon={
                                     <IconButton
                                         sx={{
@@ -104,7 +109,7 @@ export default function Projects() {
                         sx={{
                             pointerEvents: 'none',
                         }}
-                        open={open}
+                        open={openedPopoverId === i}
                         anchorEl={anchorEl}
                         anchorOrigin={{
                             vertical: 'top',
@@ -117,11 +122,7 @@ export default function Projects() {
                         onClose={handlePopoverClose}
                         disableRestoreFocus
                     >
-                        {i === item.id ? (
-                            <Typography sx={{ p: 1 }}>{item.description}</Typography>
-                        ) : (
-                            undefined
-                        )}
+                        <Typography sx={{ p: 1 }}>{item.description}</Typography>
                     </Popover>
                 </a>
             ))}
@@ -131,7 +132,6 @@ export default function Projects() {
 
 const itemData = [
     {
-        id: 0,
         img: 'book-scouts',
         title: 'Book Scouts',
         author: '@bkristastucchio',
@@ -142,7 +142,6 @@ const itemData = [
         featured: true,
     },
     {
-        id: 1,
         img: 'pizza-hunt',
         title: 'Pizza Hunt',
         author: '@helloimnik',
@@ -150,7 +149,6 @@ const itemData = [
         description: 'Pizza discussion board.',
     },
     {
-        id: 2,
         img: 'deep-thoughts',
         title: 'Deep Thoughts',
         author: '@nolanissac',
@@ -159,7 +157,6 @@ const itemData = [
         cols: 2,
     },
     {
-        id: 3,
         img: 'movie-buddy',
         title: 'Movie Buddy',
         author: '@rollelflex_graphy726',
@@ -167,7 +164,6 @@ const itemData = [
         description: 'A companion for the movies.',
     },
     {
-        id: 4,
         img: 'note-taker',
         title: 'Note Taker',
         author: '@arwinneil',
@@ -178,7 +174,6 @@ const itemData = [
         featured: true,
     },
     {
-        id: 5,
         img: 'budget-tracker',
         title: 'Budget Tracker',
         author: '@hjrc33',
@@ -186,5 +181,4 @@ const itemData = [
         description: 'Learn to save your money.',
         cols: 2,
     },
-
 ];

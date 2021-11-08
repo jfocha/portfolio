@@ -1,13 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+// import Typography from '@mui/material/Typography';
+// import Paper from '@mui/material/Paper';
+// import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import coverImage from '../../assets/portfolio-pic.jpg';
-import { boxSizing } from '@mui/system';
+// import { boxSizing } from '@mui/system';
 
 
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
+// const darkTheme = createTheme({ palette: { mode: 'dark' } });
 export default function About() {
     return (
         <Box sx={{
