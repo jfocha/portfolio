@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import About from './pages/About';
 import Projects from './pages/Projects';
@@ -89,10 +90,11 @@ function App() {
             >
               <Box sx={{
                 gridArea: 'sidebar',
-                display: 'inline-flex',
+                display: { xs: 'none', sm: 'none', md: 'inline-flex' },
                 m: 5,
                 pt: '10rem',
-                alignItems: 'flex-start'
+                alignItems: 'flex-start',
+                 
               }}>
                 <Sidebar />
               </Box>
@@ -109,6 +111,7 @@ function App() {
                 </Switch>
               </Box>
             </Box>
+            <Footer />
           </Router>
         </ImageBackground>
       </View>

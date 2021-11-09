@@ -14,7 +14,7 @@ export default function About() {
                     color: 'white',
                     lineHeight: 2
                 }}>
-                Joseph Focha
+                Joe Focha
             </Box>
             <Box
                 sx={{

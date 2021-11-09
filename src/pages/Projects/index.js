@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import Box from '@mui/material/Box';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
@@ -9,7 +9,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
-export default function Projects() {
+const Projects = props => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [openedPopoverId, setOpenedPopoverId] = React.useState(null);
@@ -26,15 +26,18 @@ export default function Projects() {
 
     const open = Boolean(anchorEl);
 
+    const getGridListCols = () => {
+        if (isWidthUp('md', props.width)) {
+            return 2;
+        }
+        return 1;
+    }
 
     return (
-        <ImageList
-            sx={{
-                width: '100%', height: '100%', overflow: 'auto'
-            }}>
+        <>
             <ImageListItem
                 key="Subheader"
-                cols={2}>
+                sx={{ display: 'flex' }}>
                 <ListSubheader
                     component="div"
                     sx={{
@@ -45,74 +48,83 @@ export default function Projects() {
                         textAlign: 'center',
                         pt: '4rem',
                         color: 'white',
-                        backgroundColor: 'inherit'
+                        backgroundColor: 'inherit',
+                        width: '100%',
                     }}>
                     Projects
                 </ListSubheader>
             </ImageListItem>
-            {itemData.map((item, i) => (
-                <a key={item.img} href={item.link} target="_blank" rel="noopener noreferrer">
-                    <div
-                        aria-owns={open ? `mouse-over-popover-${i}` : undefined}
-                        aria-haspopup="true"
-                        onMouseEnter={(e) => handlePopoverOpen(e, i)}
-                        onMouseLeave={handlePopoverClose}
-                    >
-                        <ImageListItem sx={{m: 3}}>
-                            <img
-                                src={require(`../../assets/${item.img}.jpg`).default}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                            <ImageListItemBar
-                                title={item.title}
-                                actionIcon={
-                                    <IconButton
-                                        sx={{
-                                            pr: 2,
-                                            color: 'rgba(255, 255, 255, 0.54)',
-                                            ":hover": {
-                                                transform: "scale3d(1.4, 1.4, 1)",
-                                            },
-                                        }}
-                                        aria-label={`info about ${item.title}`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            window.open(`https://github.com/jfocha/${item.img}`, "_blank");
+            <ImageList
+                cols={getGridListCols()}
+                sx={{
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto'
+                }}>
+                {itemData.map((item, i) => (
+                    <a key={item.img} href={item.link} target="_blank" rel="noopener noreferrer">
+                        <div
+                            aria-owns={open ? `mouse-over-popover-${i}` : undefined}
+                            aria-haspopup="true"
+                            onMouseEnter={(e) => handlePopoverOpen(e, i)}
+                            onMouseLeave={handlePopoverClose}
+                        >
+                            <ImageListItem sx={{ m: 3 }}>
+                                <img
+                                    src={require(`../../assets/${item.img}.jpg`).default}
+                                    alt={item.title}
+                                    loading="lazy"
+                                />
+                                <ImageListItemBar
+                                    title={item.title}
+                                    actionIcon={
+                                        <IconButton
+                                            sx={{
+                                                pr: 2,
+                                                color: 'rgba(255, 255, 255, 0.54)',
+                                                ":hover": {
+                                                    transform: "scale3d(1.4, 1.4, 1)",
+                                                },
+                                            }}
+                                            aria-label={`info about ${item.title}`}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                window.open(`https://github.com/jfocha/${item.img}`, "_blank");
                                             }}>
                                             <GitHubIcon
                                                 sx={{
                                                     transform: "scale3d(1.5, 1.5, 1)",
                                                     color: 'white',
                                                 }} />
-                                    </IconButton>
-                                }
-                            />
-                        </ImageListItem>
-                    </div>
-                    <Popover
-                        id={`mouse-over-popover-${i}`}
-                        sx={{
-                            pointerEvents: 'none',
-                        }}
-                        open={openedPopoverId === i}
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                        transformOrigin={{
-                            vertical: 'center',
-                            horizontal: 'left',
-                        }}
-                        onClose={handlePopoverClose}
-                        disableRestoreFocus
-                    >
-                        <Typography sx={{ p: 1 }}>{item.description}</Typography>
-                    </Popover>
-                </a>
-            ))}
-        </ImageList>
+                                        </IconButton>
+                                    }
+                                />
+                            </ImageListItem>
+                        </div>
+                        <Popover
+                            id={`mouse-over-popover-${i}`}
+                            sx={{
+                                pointerEvents: 'none',
+                            }}
+                            open={openedPopoverId === i}
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            transformOrigin={{
+                                vertical: 'center',
+                                horizontal: 'left',
+                            }}
+                            onClose={handlePopoverClose}
+                            disableRestoreFocus
+                        >
+                            <Typography sx={{ p: 1 }}>{item.description}</Typography>
+                        </Popover>
+                    </a>
+                ))}
+            </ImageList>
+        </>
     );
 }
 
@@ -122,9 +134,6 @@ const itemData = [
         title: 'Book Scouts',
         link: 'https://obscure-dusk-46095.herokuapp.com/',
         description: 'Online library management.',
-        rows: 2,
-        cols: 2,
-        featured: true,
     },
     {
         img: 'pizza-hunt',
@@ -137,7 +146,6 @@ const itemData = [
         title: 'Deep Thoughts',
         link: 'https://infinite-dusk-32225.herokuapp.com/',
         description: 'Social media site.',
-        cols: 2,
     },
     {
         img: 'movie-buddy',
@@ -150,15 +158,13 @@ const itemData = [
         title: 'Note Taker',
         link: 'https://shrouded-gorge-91193.herokuapp.com/',
         description: 'Persistent note taker and keeper.',
-        rows: 2,
-        cols: 2,
-        featured: true,
     },
     {
         img: 'budget-tracker',
         title: 'Budget Tracker',
         link: 'https://fierce-mountain-31398.herokuapp.com/',
         description: 'Learn to save your money.',
-        cols: 2,
     },
 ];
+
+export default withWidth()(Projects);
