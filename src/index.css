@@ -20,12 +20,34 @@ a {
 }
 
 .icon {
-  color: white;
+  color: #eddde4;
 }
 
 .icon:hover {
   transform: scale3d(1.5, 1.5, 1)
 }
 .navActive {
-  color: red;
+  color: #cc2674;
+}
+
+.form-label {
+  display: block;
+  font-size: 1.2rem;
+  margin: 0.625rem 0 0.25rem;
+  color: #eddde4;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+  color: #eddde4;
+  border: 2px solid #133eb9;
+  border-radius: 12px;
+  background-color: #102967;
+}
+
+.form-textarea {
+  height: 20rem;
 }

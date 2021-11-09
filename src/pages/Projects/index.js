@@ -41,7 +41,6 @@ export default function Projects() {
                         fontFamily: 'default',
                         fontStyle: 'oblique',
                         letterSpacing: 10,
-                        // fontWeight: 'bold',
                         fontSize: '3rem',
                         textAlign: 'center',
                         pt: '4rem',
@@ -52,34 +51,21 @@ export default function Projects() {
                 </ListSubheader>
             </ImageListItem>
             {itemData.map((item, i) => (
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    <Typography
+                <a key={item.img} href={item.link} target="_blank" rel="noopener noreferrer">
+                    <div
                         aria-owns={open ? `mouse-over-popover-${i}` : undefined}
                         aria-haspopup="true"
-                        // onMouseEnter={handlePopoverOpen}
                         onMouseEnter={(e) => handlePopoverOpen(e, i)}
                         onMouseLeave={handlePopoverClose}
                     >
-                        <ImageListItem
-                            key={item.img}
-
-                            sx={{
-                                m: 3,
-                                // borderRadius: '12px',
-                                // boxShadow: 3,
-                                // ":hover": {
-                                //     boxShadow: 12,
-                                // },
-                            }}>
+                        <ImageListItem sx={{m: 3}}>
                             <img
                                 src={require(`../../assets/${item.img}.jpg`).default}
                                 alt={item.title}
                                 loading="lazy"
-
                             />
                             <ImageListItemBar
                                 title={item.title}
-                                // subtitle={item.description}
                                 actionIcon={
                                     <IconButton
                                         sx={{
@@ -90,20 +76,20 @@ export default function Projects() {
                                             },
                                         }}
                                         aria-label={`info about ${item.title}`}
-                                    >
-                                        <a href={`https://github.com/jfocha/${item.img}`} target="_blank" rel="noopener noreferrer">
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            window.open(`https://github.com/jfocha/${item.img}`, "_blank");
+                                            }}>
                                             <GitHubIcon
                                                 sx={{
                                                     transform: "scale3d(1.5, 1.5, 1)",
                                                     color: 'white',
                                                 }} />
-                                        </a>
                                     </IconButton>
                                 }
                             />
-
                         </ImageListItem>
-                    </Typography>
+                    </div>
                     <Popover
                         id={`mouse-over-popover-${i}`}
                         sx={{
@@ -134,7 +120,6 @@ const itemData = [
     {
         img: 'book-scouts',
         title: 'Book Scouts',
-        author: '@bkristastucchio',
         link: 'https://obscure-dusk-46095.herokuapp.com/',
         description: 'Online library management.',
         rows: 2,
@@ -144,14 +129,12 @@ const itemData = [
     {
         img: 'pizza-hunt',
         title: 'Pizza Hunt',
-        author: '@helloimnik',
         link: 'https://arcane-sea-80541.herokuapp.com/',
         description: 'Pizza discussion board.',
     },
     {
         img: 'deep-thoughts',
         title: 'Deep Thoughts',
-        author: '@nolanissac',
         link: 'https://infinite-dusk-32225.herokuapp.com/',
         description: 'Social media site.',
         cols: 2,
@@ -159,14 +142,12 @@ const itemData = [
     {
         img: 'movie-buddy',
         title: 'Movie Buddy',
-        author: '@rollelflex_graphy726',
         link: 'https://jfocha.github.io/movie-buddy/index.html',
         description: 'A companion for the movies.',
     },
     {
         img: 'note-taker',
         title: 'Note Taker',
-        author: '@arwinneil',
         link: 'https://shrouded-gorge-91193.herokuapp.com/',
         description: 'Persistent note taker and keeper.',
         rows: 2,
@@ -176,7 +157,6 @@ const itemData = [
     {
         img: 'budget-tracker',
         title: 'Budget Tracker',
-        author: '@hjrc33',
         link: 'https://fierce-mountain-31398.herokuapp.com/',
         description: 'Learn to save your money.',
         cols: 2,

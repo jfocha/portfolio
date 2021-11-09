@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Grid from '@mui/material/Grid';
@@ -21,10 +20,8 @@ export default function ButtonAppBar(props) {
   }, [currentCategory]);
 
   return (
-    <Box sx={{
-      // background: 'red', 
-    }}>
-      <AppBar position="static">
+    <Box>
+      <AppBar position="static" color="secondary">
         <Toolbar>
           <Grid item xs>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -48,13 +45,6 @@ export default function ButtonAppBar(props) {
             justifyContent="space-evenly"
             alignItems="center"
           >
-            {/* <Button color="inherit">Login</Button>  */}
-
-
-            {/* <Link to="/" style={{ textDecoration: 'none', fontStyle: 'oblique', fontSize: '1.5rem', color: 'inherit' }}>About</Link>
-            <Link to="/projects" style={{ textDecoration: 'none', fontStyle: 'oblique', fontSize: '1.5rem', color: 'inherit' }}>Projects</Link>
-          <Link to="/contact" style={{ textDecoration: 'none', fontStyle: 'oblique', fontSize: '1.5rem', color: 'inherit' }}>Contact</Link>
-           */}
             {categories.map((category) => (
               <Link to={category.link}
                 className={`${currentCategory.name === category.name && `navActive`}`}
@@ -70,7 +60,6 @@ export default function ButtonAppBar(props) {
                 </span>
               </Link>
             ))}
-
           </Grid>
           <IconButton
             size="large"
@@ -81,7 +70,6 @@ export default function ButtonAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-
         </Toolbar>
       </AppBar>
     </Box>

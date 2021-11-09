@@ -3,13 +3,39 @@ import Box from '@mui/material/Box';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ImageBackground, StyleSheet, View } from "react-native";
 import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
-import Sidebar from './components/Sidebar';
+import NoMatch from './pages/NoMatch';
 import backImage from './assets/background.jpg';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// const image = { uri: require(`./assets/background.jpg`).default };
+let theme = createTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#102967',
+      dark: '#060813',
+      contrastText: '#eddde4'
+    },
+    secondary: {
+      main: '#04060f',
+      dark: '#133eb9',
+      contrastText: '#eddde4'
+    },
+    error: {
+      main: '#c82c76',
+      contrastText: '#eddde4'
+    },
+    success: {
+      main: '#04c57e'
+    },
+    background: {
+      default: '#eddde4'
+    }
+  },
+});
 
 function App() {
   const [categories] = useState([
@@ -41,63 +67,52 @@ function App() {
     }
   });
   return (
-    <View style={styles.container}>
-      <ImageBackground source={backImage} resizeMode='cover' style={styles.image}>
-        <Router>
-          <Header
-            categories={categories}
-            setCurrentCategory={setCurrentCategory}
-            currentCategory={currentCategory}
-          />
+    <ThemeProvider theme={theme}>
+      <View style={styles.container}>
+        <ImageBackground source={backImage} resizeMode='cover' style={styles.image}>
+          <Router>
+            <Header
+              categories={categories}
+              setCurrentCategory={setCurrentCategory}
+              currentCategory={currentCategory}
+            />
+            <Box
+              sx={{
+                display: 'grid',
+                maxHeight: '100vh',
+                overflow: 'auto',
+                gridTemplateColumns: 'repeat(8, 1fr)',
+                gap: 6,
+                gridTemplateRows: 'auto',
+                gridTemplateAreas: `"sidebar main main main main main main ."`,
+              }}
+            >
+              <Box sx={{
+                gridArea: 'sidebar',
+                display: 'inline-flex',
+                m: 5,
+                pt: '10rem',
+                alignItems: 'flex-start'
+              }}>
+                <Sidebar />
+              </Box>
+              <Box sx={{
+                gridArea: 'main',
+                alignItems: 'flex-start',
+              }}>
+                <Switch>
+                  <Route exact path="/" component={About} />
+                  <Route exact path="/projects" component={Projects} />
+                  <Route exact path="/contact" component={Contact} theme={theme} />
 
-
-          <Box
-            sx={{
-              display: 'grid',
-              maxHeight: '100vh',
-              overflow: 'auto',
-              gridTemplateColumns: 'repeat(8, 1fr)',
-              gap: 6,
-              gridTemplateRows: 'auto',
-              // background: 'purple',
-              gridTemplateAreas: `"sidebar main main main main main main ."`,
-            }}
-          >
-            <Box sx={{
-              gridArea: 'sidebar',
-              display: 'inline-flex',
-              m: 5,
-              pt: '10rem',
-              // background: 'yellow',
-              // position: 'static',
-              // top:'5rem',
-              alignItems: 'flex-start'
-              // transform: "scale3d(2, 2, 1)",
-              // alignItems: 'center'
-            }}>
-              <Sidebar />
+                  <Route component={NoMatch} />
+                </Switch>
+              </Box>
             </Box>
-            <Box sx={{
-              gridArea: 'main',
-              alignItems: 'flex-start',
-              // background: 'orange',
-
-            }}>
-              <Switch>
-                <Route exact path="/" component={About} />
-                <Route exact path="/projects" component={Projects} />
-                {/* <Route exact path="/contact" component={Contact} /> */}
-
-              {/* <Route component={NoMatch} /> */}
-              </Switch>
-            </Box>
-          </Box>
-
-
-        </Router>
-      </ImageBackground>
-    </View>
-
+          </Router>
+        </ImageBackground>
+      </View>
+    </ThemeProvider>
   );
 }
 
