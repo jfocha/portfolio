@@ -1,39 +1,41 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/material/Box';
 
 const Contact = () => {
-  const [status, setStatus] = useState("Send");
+  const [status, setStatus] = useState('Send');
+  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus("Sending...");
-    const { name, email, subject, message } = e.target.elements;
-    let details = {
-      name: name.value,
-      email: email.value,
-      subject: subject.value,
-      message: message.value,
-    };
-    let response = await fetch("http://localhost:5000/contact", {
-      method: "POST",
+    setStatus('Sending...');
+    let response = await fetch('http://localhost:5000/contact', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
+        'Content-Type': 'application/json;charset=utf-8',
       },
-      body: JSON.stringify(details),
+      body: JSON.stringify(formState),
       disableFileAccess: true,
-
     });
-    setStatus("Send Again?");
+    setStatus('Send Again?');
     let result = await response.json();
+    setFormState({ name: '', email: '', subject: '', message: '' });
     alert(result.status);
   };
 
   return (
-    <Box component="div" sx={{ pb: '4rem' }}>
+    <Box component='div' sx={{ pb: '4rem' }}>
       <Box
-        component="div"
+        component='div'
         sx={{
           fontFamily: 'default',
           fontStyle: 'oblique',
@@ -73,24 +75,55 @@ const Contact = () => {
         jfocha@gmail.com
       </Box>
 
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <form noValidate autoComplete='off' onSubmit={handleSubmit}>
         <div>
-          <label className="form-label" htmlFor="name">Name:</label>
-          <input className="form-input" type="text" id="name" required />
+          <label className='form-label' htmlFor='name'>Name:</label>
+          <input 
+          className='form-input' 
+          placeholder='Your Name'
+          name='name'
+          type='text' 
+          id='name' 
+          value={formState.name}
+          onChange={handleChange}
+          required />
         </div>
         <div>
-          <label className="form-label" htmlFor="email">Email:</label>
-          <input className="form-input" type="email" id="email" required />
+          <label className='form-label' htmlFor='email'>Email:</label>
+          <input 
+          className='form-input' 
+          placeholder='Your Email'
+          name='email'
+          type='email' 
+          id='email' 
+          value={formState.email}
+          onChange={handleChange}
+          required />
         </div>
         <div>
-          <label className="form-label" htmlFor="subject">Subject:</label>
-          <input className="form-input" type="subject" id="subject" required />
+          <label className='form-label' htmlFor='subject'>Subject:</label>
+          <input 
+          className='form-input' 
+          placeholder='Subject'
+          name='subject'
+          type='subject' 
+          id='subject' 
+          value={formState.subject}
+          onChange={handleChange}
+          required />
         </div>
         <div>
-          <label className="form-label" htmlFor="message">Message:</label>
-          <textarea className="form-textarea" id="message" required />
+          <label className='form-label' htmlFor='message'>Message:</label>
+          <textarea 
+          className='form-textarea' 
+          placeholder="Tell Joe there's a job for him"
+          name='message'
+          id='message' 
+          value={formState.message}
+          onChange={handleChange}
+          required />
         </div>
-        <Button variant="contained" type="submit" endIcon={<SendIcon />}>{status}</Button>
+        <Button variant='contained' type='submit' endIcon={<SendIcon />}>{status}</Button>
       </form>
     </Box>
   );
