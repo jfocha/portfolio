@@ -14,7 +14,7 @@ const Contact = () => {
       [name]: value,
     });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Sending...');
@@ -52,7 +52,7 @@ const Contact = () => {
         sx={{
           display: 'flex',
           m: 3,
-          pt: '4rem',
+          pt: '1rem',
           minWidth: { md: 350 },
           flexDirection: { xs: 'column', md: 'row' },
           justifyContent: 'center',
@@ -78,50 +78,50 @@ const Contact = () => {
       <form noValidate autoComplete='off' onSubmit={handleSubmit}>
         <div>
           <label className='form-label' htmlFor='name'>Name:</label>
-          <input 
-          className='form-input' 
-          placeholder='Your Name'
-          name='name'
-          type='text' 
-          id='name' 
-          value={formState.name}
-          onChange={handleChange}
-          required />
+          <input
+            className='form-input'
+            placeholder='Your Name'
+            name='name'
+            type='text'
+            id='name'
+            value={formState.name}
+            onChange={handleChange}
+            required />
         </div>
         <div>
           <label className='form-label' htmlFor='email'>Email:</label>
-          <input 
-          className='form-input' 
-          placeholder='Your Email'
-          name='email'
-          type='email' 
-          id='email' 
-          value={formState.email}
-          onChange={handleChange}
-          required />
+          <input
+            className='form-input'
+            placeholder='Your Email'
+            name='email'
+            type='email'
+            id='email'
+            value={formState.email}
+            onChange={handleChange}
+            required />
         </div>
         <div>
           <label className='form-label' htmlFor='subject'>Subject:</label>
-          <input 
-          className='form-input' 
-          placeholder='Subject'
-          name='subject'
-          type='subject' 
-          id='subject' 
-          value={formState.subject}
-          onChange={handleChange}
-          required />
+          <input
+            className='form-input'
+            placeholder='Subject'
+            name='subject'
+            type='subject'
+            id='subject'
+            value={formState.subject}
+            onChange={handleChange}
+            required />
         </div>
         <div>
           <label className='form-label' htmlFor='message'>Message:</label>
-          <textarea 
-          className='form-textarea' 
-          placeholder="Tell Joe there's a job for him"
-          name='message'
-          id='message' 
-          value={formState.message}
-          onChange={handleChange}
-          required />
+          <textarea
+            className='form-textarea'
+            placeholder="Tell Joe there's a job for him"
+            name='message'
+            id='message'
+            value={formState.message}
+            onChange={handleChange}
+            required />
         </div>
         <Button variant='contained' type='submit' endIcon={<SendIcon />}>{status}</Button>
       </form>

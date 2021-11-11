@@ -60,12 +60,11 @@ footer {
 }
 
 .form-textarea {
-  height: 20rem;
+  height: 18rem;
 }
 
 .footer-link {
   display: flex;
   float: right;
   padding: 15px;
-  /* align-items: center; */
 }
