@@ -11,6 +11,10 @@ import Contact from './pages/Contact';
 import NoMatch from './pages/NoMatch';
 import backImage from './assets/background.jpg';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import EmailIcon from '@mui/icons-material/Email';
 
 let theme = createTheme({
   palette: {
@@ -67,6 +71,30 @@ function App() {
       height: '100vh',
     }
   });
+
+  const linkData = [
+    {
+      name: 'GitHub',
+      url: 'https://github.com/jfocha/',
+      icon: GitHubIcon
+    },
+    {
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/joseph-focha-24492a5b/',
+      icon: LinkedInIcon
+    },
+    {
+      name: 'Resume',
+      url: 'https://drive.google.com/file/d/1U7UWBZQNO-eYE1zW_4-01z2g7SlSM5db/view?usp=sharing',
+      icon: ContactPageIcon
+    },
+    {
+      name: 'Email',
+      url: 'mailto:jfocha@gmail.com',
+      icon: EmailIcon
+    },
+  ];
+
   return (
     <ThemeProvider theme={theme}>
       <View style={styles.container}>
@@ -94,9 +122,9 @@ function App() {
                 m: 5,
                 pt: '10rem',
                 alignItems: 'flex-start',
-                 
+
               }}>
-                <Sidebar />
+                <Sidebar linkData={linkData} />
               </Box>
               <Box sx={{
                 gridArea: 'main',
@@ -111,7 +139,7 @@ function App() {
                 </Switch>
               </Box>
             </Box>
-            <Footer />
+            <Footer linkData={linkData} />
           </Router>
         </ImageBackground>
       </View>

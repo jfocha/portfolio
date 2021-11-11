@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Permanent Marker', cursive,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Permanent Marker", cursive, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -19,12 +19,22 @@ a {
   color: inherit;
 }
 
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 3rem;
+  color: #eddde4;
+  background: rgba(6, 8 ,19 , 0.85);
+}
+
 .icon {
   color: #eddde4;
 }
 
 .icon:hover {
-  transform: scale3d(1.5, 1.5, 1)
+  transform: scale3d(1.5, 1.5, 1);
 }
 .navActive {
   color: #cc2674;
@@ -37,7 +47,8 @@ a {
   color: #eddde4;
 }
 
-.form-input, .form-textarea {
+.form-input,
+.form-textarea {
   width: 100%;
   padding: 0.75rem;
   margin: 0.2rem 0;
@@ -50,4 +61,11 @@ a {
 
 .form-textarea {
   height: 20rem;
+}
+
+.footer-link {
+  display: flex;
+  float: right;
+  padding: 15px;
+  /* align-items: center; */
 }
