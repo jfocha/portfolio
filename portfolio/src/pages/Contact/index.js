@@ -7,7 +7,7 @@ const Contact = () => {
   const [status, setStatus] = useState('Send');
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
 
-  const url = window.location.origin;
+  const url = window.location.origin + '/contact';
   // const url = 'http://localhost:5000/contact';
 
   const handleChange = (event) => {
