@@ -7,6 +7,9 @@ const Contact = () => {
   const [status, setStatus] = useState('Send');
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
 
+  const url = window.location.origin;
+  // const url = 'http://localhost:5000/contact';
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -18,7 +21,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Sending...');
-    let response = await fetch('http://localhost:5000/contact', {
+    let response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
