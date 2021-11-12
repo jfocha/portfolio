@@ -53,6 +53,7 @@ export default function About() {
                         flexDirection: 'column',
                         alignItems: { xs: 'center', md: 'flex-start' },
                         m: 3,
+                        pb: '3rem',
                         minWidth: { md: 350 },
                     }}>
                     <Box component="span" sx={{ fontSize: 20, mt: 1, }}>

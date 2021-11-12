@@ -69,11 +69,17 @@ const Projects = props => {
                             onMouseEnter={(e) => handlePopoverOpen(e, i)}
                             onMouseLeave={handlePopoverClose}
                         >
-                            <ImageListItem sx={{ m: 3 }}>
+                            <ImageListItem
+                                sx={{
+                                    m: 3,
+                                    transition: "opacity .3s",
+                                    ":hover": {
+                                        opacity: 0.5,
+                                    },
+                                }}>
                                 <img
                                     src={require(`../../assets/${item.img}.jpg`).default}
                                     alt={item.title}
-                                    loading="lazy"
                                 />
                                 <ImageListItemBar
                                     title={item.title}
