@@ -88,7 +88,7 @@ function App() {
     },
     {
       name: 'Resume',
-      url: 'https://drive.google.com/file/d/1U7UWBZQNO-eYE1zW_4-01z2g7SlSM5db/view?usp=sharing',
+      url: 'https://drive.google.com/file/d/1siCFARy2LvyUEwV_HsCYhOPpaNgtej_a/view?usp=sharing',
       icon: ContactPageIcon
     },
     {
