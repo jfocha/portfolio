@@ -36,7 +36,7 @@ const Contact = () => {
   };
 
   return (
-    <Box component='div' sx={{ pb: '4rem' }}>
+    <Box component='div'>
       <Box
         component='div'
         sx={{

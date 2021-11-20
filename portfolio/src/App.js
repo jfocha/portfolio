@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 
 let theme = createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
       main: '#102967',
       dark: '#060813',
@@ -37,7 +37,8 @@ let theme = createTheme({
       main: '#04c57e'
     },
     background: {
-      default: '#eddde4'
+      paper: '#04060f',
+      default: '#121212'
     }
   },
 });
@@ -116,6 +117,7 @@ function App() {
               gap: 6,
               gridTemplateRows: 'auto',
               gridTemplateAreas: `"sidebar main main main main main main ."`,
+              pb: '10rem'
             }}
           >
             <Box sx={{

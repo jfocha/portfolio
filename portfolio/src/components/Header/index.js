@@ -38,7 +38,7 @@ export default function ButtonAppBar(props) {
 
   return (
     <Box>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" >
         <Toolbar>
           <Grid item xs>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -93,9 +93,7 @@ export default function ButtonAppBar(props) {
             >
               <MenuIcon />
             </IconButton>
-            {categories.map((category, i) => (
               <Menu
-                key={i}
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -118,7 +116,6 @@ export default function ButtonAppBar(props) {
                   </span>
                 ))}
               </Menu>
-            ))}
           </div>
         </Toolbar>
       </AppBar>
