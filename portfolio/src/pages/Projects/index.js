@@ -31,7 +31,7 @@ const Projects = props => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [openedPopoverId, setOpenedPopoverId] = React.useState(null);
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(null);
 
     const handlePopoverOpen = (event, popoverId) => {
         setAnchorEl(event.currentTarget);
@@ -52,8 +52,11 @@ const Projects = props => {
         return 1;
     }
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const handleExpandClick = (expandedId) => {
+        setExpanded(expandedId);
+        if (expandedId === expanded) {
+            setExpanded(null);
+        }
     };
 
     return (
@@ -164,12 +167,12 @@ const Projects = props => {
                         </a>
                         <CardActions disableSpacing sx={{ mx: 2 }}>
                             <ExpandMore
-                                expand={expanded}
+                                expand={expanded === i}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    handleExpandClick();
+                                    handleExpandClick(i);
                                 }}
-                                aria-expanded={expanded}
+                                aria-expanded={expanded === i}
                                 aria-label="show more"
                             >
                                 <ExpandMoreIcon />
@@ -178,8 +181,8 @@ const Projects = props => {
                                 Technologies Used
                             </Typography>
                         </CardActions>
-                        <Collapse in={expanded} timeout="auto" unmountOnExit>
-                            <CardContent sx={{ mx: 1, }} >{item.built.map((item, i) => (
+                        <Collapse in={expanded === i} timeout="auto" unmountOnExit>
+                            <CardContent sx={{ mx: 1, }} >{item.built.map((technologies, i) => (
                                 <Typography
                                     key={`built-${i}`}
                                     color="text.secondary"
@@ -188,7 +191,7 @@ const Projects = props => {
                                         justifyContent: 'flex-end',
                                         mx: 2,
                                     }}>
-                                    {item}
+                                    {technologies}
                                 </Typography>
                             ))}
                             </CardContent>
@@ -209,7 +212,7 @@ const itemData = [
         title: 'Book Scouts',
         link: 'https://obscure-dusk-46095.herokuapp.com/',
         description: 'Online library management.',
-        summary: 'This is an online library management app where users can rent books for a specific time .',
+        summary: 'This is an online library management app where users can rent books for a specific time. Login and the current selection of books in the library are presented. Users are able to checkout books and add them to their account. An account page for users tracks the books that are checkout in a sortable list and allows users to return books. A pay page allows users to pay fines through Stripe.',
         built: ['Apollo Server', 'Mongoose', 'bcrypt', 'Express', 'GraphQL', 'JSON Web Token', 'Apollo Client', 'React', 'Material UI', 'Stripe']
     },
     {
@@ -225,7 +228,7 @@ const itemData = [
         title: 'Deep Thoughts',
         link: 'https://infinite-dusk-32225.herokuapp.com/',
         description: 'Social media site.',
-        summary: 'A social media application where users can create an account, post their thoughts for others to see, and interact with other users through these thoughts.',
+        summary: 'A social media application where users can create an account, post their thoughts for others to see, and interact with other users through these thoughts. Users have an account page that displays their thoughts. Reactions can be attached to thoughts to continue the conversation.',
         built: ['Apollo Server', 'Mongoose', 'bcrypt', 'Express', 'GraphQL', 'JSON Web Token', 'Apollo Client', 'React', 'React Router']
     },
     {
@@ -241,7 +244,7 @@ const itemData = [
         title: 'Note Taker',
         link: 'https://shrouded-gorge-91193.herokuapp.com/',
         description: 'Persistent note taker and keeper.',
-        summary: 'An app used to write and save notes.',
+        summary: 'An app used to write and save notes. No login is required. The notes can be deleted or edited. ',
         built: ['Express', 'JavaScript', 'HTML', 'CSS']
     },
     {
@@ -249,7 +252,7 @@ const itemData = [
         title: 'Budget Tracker',
         link: 'https://fierce-mountain-31398.herokuapp.com/',
         description: 'Learn to save your money.',
-        summary: 'A handy app to track your budget that works online as well as offline.',
+        summary: 'A handy app to track your budget that works online as well as offline. This progressive web app does not require a login, but uses local storage instead.',
         built: ['Mongoose', 'Express', 'JavaScript', 'HTML', 'CSS']
     },
 ];
